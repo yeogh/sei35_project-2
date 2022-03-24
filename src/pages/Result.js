@@ -77,9 +77,54 @@ const Result = () => {
 
   // handleToggle={() => setValue(!value)}
 
+  const langlist = [];
+  for (let j = 0; j < bookCtx.titleList.length; j++) {
+    langlist[j] = bookCtx.titleList[j].lang;
+  }
+  console.log(langlist);
+
+  const langlisttidied = langlist.flat();
+  console.log(langlisttidied);
+
+  let uniqueLangList = langlisttidied.filter((c, index) => {
+    return langlisttidied.indexOf(c) === index;
+  });
+  console.log(uniqueLangList);
+  for (let k = 0; k < uniqueLangList.length; k++) {
+    if (uniqueLangList[k] === "und") {
+      uniqueLangList.splice(k, 1);
+    } else if (uniqueLangList[k] === undefined) {
+      uniqueLangList.splice(k, 1);
+    }
+  }
+  console.log(uniqueLangList);
+
+  const convertLang = (element) => {
+    if (element === "eng") {
+      return "English";
+    } else if (element === "ita") {
+      return "Italian";
+    } else if (element === "ger") {
+      return "German";
+    } else if (element === "spa") {
+      return "Spanish";
+    } else if (element === "fre") {
+      return "French";
+    }
+  };
+
+  let selectlist = uniqueLangList.map((element, index) => {
+    return (
+      <option key={index} value={element}>
+        {convertLang(element)}
+      </option>
+    );
+  });
+
   return (
     <>
       <h6 id="numofresults">{bookCtx.numOfResult} record(s) found</h6>
+
       <button
         id="sortbutton"
         type="button"
@@ -92,6 +137,8 @@ const Result = () => {
           ? "Sorted by Date (latest to earliest)"
           : "Sort By Date (latest to earliest)"}
       </button>
+
+      <select>{selectlist}</select>
 
       {/* <div className="table-responsive-sm" id="results">
         <table className="table table-hover">
