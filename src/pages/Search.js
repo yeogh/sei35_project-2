@@ -114,7 +114,7 @@ const Search = () => {
 
   return (
     <>
-      <div className="input-group mb-3 col-xs-4">
+      <div className="input-group mb-3 col-xs-4 ">
         <form className="container" onSubmit={handleFormSubmission}>
           <input
             className="form-control"

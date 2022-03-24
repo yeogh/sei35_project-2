@@ -13,7 +13,11 @@ const Result = () => {
         key={index}
         onClick={() => bookCtx.addtoMyList(element)}
       >
-        <div className={`card h-100 ${element.inlist ? "border-warning" : ""}`}>
+        <div
+          className={`card h-100 ${
+            element.inlist ? "border-warning border-5" : ""
+          }`}
+        >
           <img
             className="card-img-top"
             width="50"
@@ -75,8 +79,6 @@ const Result = () => {
     return resultlist;
   };
 
-  // handleToggle={() => setValue(!value)}
-
   const langlist = [];
   for (let j = 0; j < bookCtx.titleList.length; j++) {
     langlist[j] = bookCtx.titleList[j].lang;
@@ -124,21 +126,25 @@ const Result = () => {
   return (
     <>
       <h6 id="numofresults">{bookCtx.numOfResult} record(s) found</h6>
+      <div id="filter">
+        <button
+          id="sortbutton"
+          type="button"
+          className={`btn btn-outline-primary ${
+            bookCtx.sorted ? "disabled" : ""
+          }`}
+          onClick={sortedlist}
+        >
+          {bookCtx.sorted
+            ? "Sorted by Date (latest to earliest)"
+            : "Sort By Date (latest to earliest)"}
+        </button>
 
-      <button
-        id="sortbutton"
-        type="button"
-        className={`btn btn-outline-primary ${
-          bookCtx.sorted ? "disabled" : ""
-        }`}
-        onClick={sortedlist}
-      >
-        {bookCtx.sorted
-          ? "Sorted by Date (latest to earliest)"
-          : "Sort By Date (latest to earliest)"}
-      </button>
-
-      <select>{selectlist}</select>
+        <select>{selectlist}</select>
+      </div>
+      <div className="row row-cols-3 row-cols-md-6 g-4">
+        {bookCtx.sorted ? sortedlist() : resultlist}
+      </div>
 
       {/* <div className="table-responsive-sm" id="results">
         <table className="table table-hover">
@@ -178,10 +184,6 @@ const Result = () => {
           </tbody>
         </table>
       </div> */}
-
-      <div className="row row-cols-3 row-cols-md-6 g-4">
-        {bookCtx.sorted ? sortedlist() : resultlist}
-      </div>
     </>
   );
 };

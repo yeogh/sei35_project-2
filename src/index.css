@@ -28,7 +28,9 @@ body {
 nav {
   display: flex;
   flex-direction: column;
-  position: fixed;
+  z-index: 3;
+  background-color: whitesmoke;
+  margin-bottom: 5px;
 }
 
 .navbar a,
@@ -65,32 +67,19 @@ button {
   text-align: center;
 }
 
+nav {
+  position: sticky;
+  top: 0;
+}
+
 /* Result page */
-#results {
+
+#filter {
   display: flex;
-  justify-content: row;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#sortbutton {
-  display: flex;
-  align-content: flex-end;
+select {
+  height: 40px;
 }
-
-/* .card,
-.card-img-top,
-.card-body,
-.card-title,
-#cardtitle,
-#cardauthor {
-  background-color: whitesmoke;
-} */
-
-/* li {
-  list-style: none;
-  padding: 0.3em;
-  /* text-align: center; */
-/* } */
-
-/* li:nth-child(odd) {
-  background: whitesmoke;
-} */
