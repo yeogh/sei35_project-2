@@ -16,6 +16,6 @@ App with the following functionalities:
 
 ## Unsolved problem/ Enhancement for future releases
 - Filter result list by language (In progress)
-- Integrate with [Google Embedded Viewer API] (https://developers.google.com/books/docs/viewer/developers_guide)
+- Integrate with [Google Embedded Viewer API](https://developers.google.com/books/docs/viewer/developers_guide)
 - Add functions to track reading list.
 - Improve on UI design
