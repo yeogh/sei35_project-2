@@ -41,37 +41,6 @@ const Result = () => {
     );
   });
 
-  // let resultlist = bookCtx.titleList.map((element, index) => {
-  //   return (
-  //     <div
-  //       className="col"
-  //       key={index}
-  //       onClick={() => bookCtx.addtoMyList(element)}
-  //     >
-  //       <div className="card h-100">
-  //         <img
-  //           className="card-img-top"
-  //           width="50"
-  //           alt="cover"
-  //           src={
-  //             element.coverimg
-  //               ? "https://covers.openlibrary.org/b/olid/" + element.olid
-  //               : noimage
-  //           }
-  //         />
-  //         <div className="card-body">
-  //           <p className="card-title">
-  //             <strong id="cardtitle">{element.title}</strong>
-  //             <br />
-  //             <em id="cardauthor">{element.author}</em> <br />
-  //             {element.pubYear}
-  //           </p>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // });
-
   const sortedlist = () => {
     bookCtx.titleList.sort((a, b) => b.pubYear - a.pubYear);
     console.log(bookCtx.titleList);
@@ -79,6 +48,7 @@ const Result = () => {
     return resultlist;
   };
 
+  //For creation of language dropdown list
   const langlist = [];
   for (let j = 0; j < bookCtx.titleList.length; j++) {
     langlist[j] = bookCtx.titleList[j].lang;
@@ -92,6 +62,7 @@ const Result = () => {
     return langlisttidied.indexOf(c) === index;
   });
   console.log(uniqueLangList);
+
   for (let k = 0; k < uniqueLangList.length; k++) {
     if (uniqueLangList[k] === "und") {
       uniqueLangList.splice(k, 1);
@@ -112,6 +83,8 @@ const Result = () => {
       return "Spanish";
     } else if (element === "fre") {
       return "French";
+    } else {
+      return "Other languages";
     }
   };
 

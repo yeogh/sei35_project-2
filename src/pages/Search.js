@@ -34,11 +34,6 @@ const Search = () => {
       } else {
         pubYearArr[i] = 0;
       }
-      // if (pubYearArr[i] === undefined) {
-      //   pubYearArr[i] = 0;
-      // } else {
-      //   pubYearArr[i] = Math.max(...pubYearArr[i]);
-      // }
 
       olidArr[i] = `${searchdata.docs[i].cover_edition_key}-M.jpg`;
       if (olidArr[i] === "undefined-M.jpg") {
@@ -52,6 +47,11 @@ const Search = () => {
       inMyListArr[i] = false;
 
       langArr[i] = searchdata.docs[i].language;
+      if (langArr[i]) {
+        langArr[i] = langArr[i][0];
+      } else {
+        langArr[i] = "und";
+      }
 
       bookCtx.setTitleList((prevState) => {
         return [
@@ -75,6 +75,7 @@ const Search = () => {
       console.log("PubYearArr:" + pubYearArr[0]);
       console.log("OlidArr:" + olidArr);
       console.log("ISBNArr:" + isbnArr);
+      console.log(langArr);
     }
     bookCtx.setNumOfResult(searchdata.num_found);
 
