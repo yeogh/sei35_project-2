@@ -111,20 +111,14 @@ const fetchSearchPost = async () => {
       fetchSearchPost();
       bookCtx.setResult(true);
       bookCtx.setMessage("");
-      // document.getElementById("numofresults").style.visibility = "visible";
-    }
+     }
   };
 
-  // const removeSearch = () => {
-  //   bookCtx.setInput("");
-  //   bookCtx.setTitleList([]);
-  //   bookCtx.setNumOfResult("");
-  //   bookCtx.setSorted(false);
-  // };
 
   return (
     <>
       <div className="input-group mb-3 col-xs-4 ">
+
         <form className="container" onSubmit={handleFormSubmission}>
           <input
             className="form-control"
@@ -137,13 +131,7 @@ const fetchSearchPost = async () => {
           <button className="btn btn-outline-dark">Search</button>
         </form>
 
-        {/* <button
-          type="button"
-          className="btn btn-outline-primary"
-          onClick={removeSearch}
-        >
-          Clear Search
-        </button> */}
+
       </div>
       <h6 id="message">{bookCtx.message}</h6>
     </>

@@ -16,8 +16,10 @@ function App() {
   const [mylist, setMyList] = useState([]);
   const [sorted, setSorted] = useState(false);
   const [message, setMessage] = useState("");
-  const [selectlist, setSelectList] = useState([]);
-  const [chosen, setChosen] = useState("");
+
+  const [listToShow, setListToShow] = useState([]);
+  const [langddl, setLangDLL] = useState([]);
+  const [selectedLang, setSelectedLang] = useState("");
 
   const addtoMyList = (element) => {
     console.log(titleList.indexOf(element));
@@ -46,10 +48,10 @@ function App() {
         addtoMyList,
         message,
         setMessage,
-        selectlist,
-        setSelectList,
-        chosen,
-        setChosen,
+        listToShow, setListToShow,
+        langddl, setLangDLL,
+        selectedLang,
+        setSelectedLang,
       }}
     >
       <div className="container">

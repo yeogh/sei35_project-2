@@ -1,15 +1,81 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import noimage from "../images/no_image_icon.png";
 import BookContext from "./book-context";
-// import Select from "react-select";
 
 const Result = () => {
 
   const bookCtx = useContext(BookContext);
-  console.log(bookCtx.titleList);
 
+  //For creation of language dropdown list
+  const langlist = [];
+  for (let j = 0; j < bookCtx.titleList.length; j++) {
+    langlist[j] = bookCtx.titleList[j].lang;
+  }
+ 
+  const langlisttidied = langlist.flat();
 
-  let resultlist = bookCtx.titleList.map((element, index) => {
+  let uniqueLangList = langlisttidied.filter((c, index) => {
+    return langlisttidied.indexOf(c) === index;
+  });
+  
+  for (let k = 0; k < uniqueLangList.length; k++) {
+    if (uniqueLangList[k] === "und") {
+      uniqueLangList.splice(k, 1);
+    } else if (uniqueLangList[k] === undefined) {
+      uniqueLangList.splice(k, 1);
+    }
+  }
+
+  let selectlist = uniqueLangList.map((element, index) => {
+    return (
+      <option key={index} value={element} >
+        {/* {convertLang(element)} */}
+        {element}
+      </option>
+    );
+  });
+  
+  useEffect(() => {
+    bookCtx.setListToShow(bookCtx.titleList)
+
+    console.log(bookCtx.titleList);
+    console.log(langlist);
+    console.log(langlisttidied);
+    console.log(uniqueLangList);
+    console.log(selectlist);
+
+  }, [bookCtx.titleList])
+
+  const handleChange = (e) => {
+    bookCtx.setSelectedLang(e.target.value);
+    console.log(e.target.value)
+    
+    if (e.target.value === "all") {
+      bookCtx.setListToShow(bookCtx.titleList)
+    } else {
+      bookCtx.setListToShow(bookCtx.titleList.filter(function (element) {
+        return element.lang === e.target.value;
+        }))
+      }
+  }
+  
+    // const convertLang = (element) => {
+    //   if (element === "eng") {
+    //     return "English";
+    //   } else if (element === "ita") {
+    //     return "Italian";
+    //   } else if (element === "ger") {
+    //     return "German";
+    //   } else if (element === "spa") {
+    //     return "Spanish";
+    //   } else if (element === "fre") {
+    //     return "French";
+    //   } else {
+    //     return "Other languages";
+    //   }
+    // };
+
+  let resultlist = bookCtx.listToShow.map((element, index) => {
      return (
       <div
         className="col"
@@ -18,7 +84,7 @@ const Result = () => {
       >
         <div
           className={`card h-100 ${
-            element.inlist ? "border-success border-5" : ""
+            element.inlist ? "border-success border-4" : ""
           }`}
         >
           <img
@@ -44,113 +110,14 @@ const Result = () => {
     );
   });
 
-  // let resultlist = bookCtx.titleList.map((element, index) => {
-  //   return (
-  //     <div
-  //       className="col"
-  //       key={index}
-  //       onClick={() => bookCtx.addtoMyList(element)}
-  //     >
-  //       <div
-  //         className={`card h-100 ${
-  //           element.inlist ? "border-success border-5" : ""
-  //         }`}
-  //       >
-  //         <img
-  //           className="card-img-top"
-  //           width="50"
-  //           alt="cover"
-  //           src={
-  //             element.coverimg
-  //               ? "https://covers.openlibrary.org/b/olid/" + element.olid
-  //               : noimage
-  //           }
-  //         />
-  //         <div className="card-body">
-  //           <p className="card-title">
-  //             <strong id="cardtitle">{element.title}</strong>
-  //             <br />
-  //             <em id="cardauthor">{element.author}</em> <br />
-  //             {element.pubYear}
-  //           </p>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // });
 
   const sortedlist = () => {
-    bookCtx.titleList.sort((a, b) => b.pubYear - a.pubYear);
+    bookCtx.listToShow.sort((a, b) => b.pubYear - a.pubYear);
     console.log(bookCtx.titleList);
     bookCtx.setSorted(true);
     return resultlist;
   };
 
-  //For creation of language dropdown list
-  const langlist = [];
-  for (let j = 0; j < bookCtx.titleList.length; j++) {
-    langlist[j] = bookCtx.titleList[j].lang;
-  }
-  console.log(langlist);
-
-  const langlisttidied = langlist.flat();
-  console.log(langlisttidied);
-
-  let uniqueLangList = langlisttidied.filter((c, index) => {
-    return langlisttidied.indexOf(c) === index;
-  });
-  console.log(uniqueLangList);
-
-  for (let k = 0; k < uniqueLangList.length; k++) {
-    if (uniqueLangList[k] === "und") {
-      uniqueLangList.splice(k, 1);
-    } else if (uniqueLangList[k] === undefined) {
-      uniqueLangList.splice(k, 1);
-    }
-  }
-  console.log(uniqueLangList);
-  
-  // let newTitleList = [];
-
-  const handleChange = (e) => {
-    bookCtx.setChosen(e.target.value);
-    console.log(e.target.value)
-
-    // newTitleList = bookCtx.titleList.filter(function (element) {
-    // return element.lang = bookCtx.chosen;
-    // })
-    bookCtx.setTitleList(bookCtx.titleList.filter(function (element) {
-      return element.lang === e.target.value;
-      }))
-
-  }
-
-  // const convertLang = (element) => {
-  //   if (element === "eng") {
-  //     return "English";
-  //   } else if (element === "ita") {
-  //     return "Italian";
-  //   } else if (element === "ger") {
-  //     return "German";
-  //   } else if (element === "spa") {
-  //     return "Spanish";
-  //   } else if (element === "fre") {
-  //     return "French";
-  //   } else {
-  //     return "Other languages";
-  //   }
-  // };
-
-
-  let selectlist = uniqueLangList.map((element, index) => {
-    return (
-      <option key={index} value={element} >
-        {/* {convertLang(element)} */}
-        {element}
-      </option>
-    );
-  });
-  console.log(selectlist);
 
   return (
     <>
@@ -166,9 +133,14 @@ const Result = () => {
             ? "Sorted by Date (latest to earliest)"
             : "Sort By Date (latest to earliest)"}
         </button>
-
-        <select onChange={handleChange}>{selectlist}</select>
-   
+        
+        <div id="language-list">
+          <h6>Filter by language:</h6>
+          <select onChange={handleChange}>
+            <option value="all">All</option>
+            {selectlist}
+          </select>
+        </div>
       </div>
    
       <div className="row row-cols-3 row-cols-md-6 g-4">
