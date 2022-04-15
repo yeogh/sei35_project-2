@@ -114,7 +114,6 @@ const fetchSearchPost = async () => {
      }
   };
 
-
   return (
     <>
       <div className="input-group mb-3 col-xs-4 ">

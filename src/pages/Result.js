@@ -46,16 +46,17 @@ const Result = () => {
 
   }, [bookCtx.titleList])
 
-  const handleChange = (e) => {
-    bookCtx.setSelectedLang(e.target.value);
+  const handleFilterChange = (e) => {
     console.log(e.target.value)
-    
+
     if (e.target.value === "all") {
       bookCtx.setListToShow(bookCtx.titleList)
+      bookCtx.setFiltered(false)
     } else {
       bookCtx.setListToShow(bookCtx.titleList.filter(function (element) {
         return element.lang === e.target.value;
         }))
+        bookCtx.setFiltered(true)
       }
   }
   
@@ -75,55 +76,81 @@ const Result = () => {
     //   }
     // };
 
+
+// For sorting of results
+
+  // const sortedlist = () => {
+  //   bookCtx.listToShow.sort((a, b) => b.pubYear - a.pubYear);
+  //   console.log(bookCtx.titleList);
+  //   bookCtx.setSorted(true);
+  //   return resultlist;
+  // };
+
+  const handleSortChange = (e) => {
+    console.log(e.target.value)
+
+    if (e.target.value === "none") {
+      // bookCtx.setListToShow(bookCtx.titleList);
+      bookCtx.setSorted(0)
+
+    } else if (e.target.value === "title") {
+      bookCtx.setListToShow(bookCtx.listToShow.sort(function (a, b) {
+      let textA = a.title.toUpperCase();
+      let textB = b.title.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      }));
+      bookCtx.setSorted(1)
+
+    } else if (e.target.value === "date") {
+      bookCtx.setListToShow(bookCtx.listToShow.sort((a, b) => b.pubYear - a.pubYear));
+      bookCtx.setSorted(2)
+
+    }
+  }
+
   let resultlist = bookCtx.listToShow.map((element, index) => {
-     return (
-      <div
-        className="col"
-        key={index}
-        onClick={() => bookCtx.addtoMyList(element)}
-      >
-        <div
-          className={`card h-100 ${
-            element.inlist ? "border-success border-4" : ""
-          }`}
-        >
-          <img
-            className="card-img-top"
-            width="50"
-            alt="cover"
-            src={
-              element.coverimg
-                ? "https://covers.openlibrary.org/b/olid/" + element.olid
-                : noimage
-            }
-          />
-          <div className="card-body">
-            <p className="card-title">
-              <strong id="cardtitle">{element.title}</strong>
-              <br />
-              <em id="cardauthor">{element.author}</em> <br />
-              {element.pubYear}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  });
+    return (
+     <div
+       className="col"
+       key={index}
+       onClick={() => bookCtx.addtoMyList(element)}
+     >
+       <div
+         className={`card h-100 ${
+           element.inlist ? "border-success border-4" : ""
+         }`}
+       >
+         <img
+           className="card-img-top"
+           width="50"
+           alt="cover"
+           src={
+             element.coverimg
+               ? "https://covers.openlibrary.org/b/olid/" + element.olid
+               : noimage
+           }
+         />
+         <div className="card-body">
+           <p className="card-title">
+             <strong id="cardtitle">{element.title}</strong>
+             <br />
+             <em id="cardauthor">{element.author}</em> <br />
+             {element.pubYear}
+           </p>
+         </div>
+       </div>
+     </div>
+   );
+ });
 
-
-  const sortedlist = () => {
-    bookCtx.listToShow.sort((a, b) => b.pubYear - a.pubYear);
-    console.log(bookCtx.titleList);
-    bookCtx.setSorted(true);
-    return resultlist;
-  };
 
 
   return (
     <>
-      <h6 id="numofresults">{bookCtx.numOfResult} record(s) found</h6>
+      <h6 id="numofresults">{bookCtx.filtered ? bookCtx.listToShow.length : bookCtx.numOfResult} record(s) found</h6>
+    
       <div id="filter">
-        <button
+        {/* <button
           id="sortbutton"
           type="button"
           className={`btn btn-outline-dark ${bookCtx.sorted ? "disabled" : ""}`}
@@ -132,21 +159,31 @@ const Result = () => {
           {bookCtx.sorted
             ? "Sorted by Date (latest to earliest)"
             : "Sort By Date (latest to earliest)"}
-        </button>
+        </button> */}
         
         <div id="language-list">
           <h6>Filter by language:</h6>
-          <select onChange={handleChange}>
+          <select onChange={handleFilterChange}>
             <option value="all">All</option>
             {selectlist}
           </select>
         </div>
+
+        <div id="sort">
+          <h6>Sort by:</h6>
+          <select onChange={handleSortChange}>
+            <option value="none" selected="selected">None</option>
+            <option value="title">Title (alphabetical)</option>
+            <option value="date">Date (latest to earliest)</option>
+          </select>
+        </div>
+
       </div>
    
       <div className="row row-cols-3 row-cols-md-6 g-4">
-        {bookCtx.sorted ? sortedlist() : resultlist}
+        {/* {bookCtx.sorted ? sortedlist() : resultlist} */}
+        {resultlist}
       </div>
-
      
     </>
   );

@@ -14,12 +14,11 @@ function App() {
   const [numOfResult, setNumOfResult] = useState();
   const [result, setResult] = useState(false);
   const [mylist, setMyList] = useState([]);
-  const [sorted, setSorted] = useState(false);
+  const [sorted, setSorted] = useState(0);
   const [message, setMessage] = useState("");
 
   const [listToShow, setListToShow] = useState([]);
-  const [langddl, setLangDLL] = useState([]);
-  const [selectedLang, setSelectedLang] = useState("");
+  const [filtered, setFiltered] = useState(false);
 
   const addtoMyList = (element) => {
     console.log(titleList.indexOf(element));
@@ -49,9 +48,7 @@ function App() {
         message,
         setMessage,
         listToShow, setListToShow,
-        langddl, setLangDLL,
-        selectedLang,
-        setSelectedLang,
+        filtered, setFiltered
       }}
     >
       <div className="container">
