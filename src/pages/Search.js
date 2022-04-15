@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import BookContext from "./book-context";
+import axios from 'axios';
 
 const Search = () => {
   const bookCtx = useContext(BookContext);
@@ -13,11 +14,19 @@ const Search = () => {
   let inMyListArr = [];
   let langArr = [];
 
-  const fetchSearchPost = async () => {
-    const searchurl = "http://openlibrary.org/search.json?q=";
-    const res = await fetch(searchurl + bookCtx.input);
-    const searchdata = await res.json();
-    console.log(searchdata);
+//Using Axios
+const fetchSearchPost = async () => { 
+  const searchurl = "http://openlibrary.org/search.json?q=";
+  const res = await axios.get(searchurl + bookCtx.input);
+  const searchdata = res.data;
+  console.log(searchdata);
+
+  //Using Fetch API
+  // const fetchSearchPost = async () => {
+  //   const searchurl = "http://openlibrary.org/search.json?q=";
+  //   const res = await fetch(searchurl + bookCtx.input);
+  //   const searchdata = await res.json();
+  //   console.log(searchdata);
 
     for (let i = 0; i < searchdata.docs.length; i++) {
       titleArr[i] = searchdata.docs[i].title;
@@ -125,7 +134,7 @@ const Search = () => {
             placeholder="Enter title/author keyword"
           />
 
-          <button className="btn btn-outline-primary">Search</button>
+          <button className="btn btn-outline-dark">Search</button>
         </form>
 
         {/* <button

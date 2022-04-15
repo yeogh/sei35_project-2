@@ -1,0 +1,9 @@
+.navbar {
+  background-color: rgba(205, 212, 210, 0.842);
+}
+
+.navbar a:hover,
+.navbar a:active,
+.navbar a.active {
+  border-bottom: 3px solid rgb(41, 75, 41);
+}

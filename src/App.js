@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+// import { Route, Switch } from "react-router-dom";
 import Search from "./pages/Search";
 import Result from "./pages/Result";
 import MyList from "./pages/MyList";
 import NavBar from "./components/NavBar";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import BookContext from "./pages/book-context";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
   const [input, setInput] = useState("");
@@ -14,8 +15,9 @@ function App() {
   const [result, setResult] = useState(false);
   const [mylist, setMyList] = useState([]);
   const [sorted, setSorted] = useState(false);
-
   const [message, setMessage] = useState("");
+  const [selectlist, setSelectList] = useState([]);
+  const [chosen, setChosen] = useState("");
 
   const addtoMyList = (element) => {
     console.log(titleList.indexOf(element));
@@ -44,9 +46,35 @@ function App() {
         addtoMyList,
         message,
         setMessage,
+        selectlist,
+        setSelectList,
+        chosen,
+        setChosen,
       }}
     >
       <div className="container">
+        <NavBar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Navigate replace to="home" />} />
+            <Route
+              path="/home"
+              element={
+                result ? (
+                  <>
+                    <Search /> <Result />
+                  </>
+                ) : (
+                  <Search />
+                )
+              }
+            />
+            <Route path="/my-list" element={<MyList />} />
+          </Routes>
+        </main>
+      </div>
+
+      {/* <div className="container">
         <NavBar />
         <main>
           <Switch>
@@ -62,7 +90,7 @@ function App() {
             </Route>
           </Switch>
         </main>
-      </div>
+      </div> */}
     </BookContext.Provider>
   );
 }
