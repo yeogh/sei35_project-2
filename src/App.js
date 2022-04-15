@@ -19,6 +19,8 @@ function App() {
 
   const [listToShow, setListToShow] = useState([]);
   const [filtered, setFiltered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const addtoMyList = (element) => {
     console.log(titleList.indexOf(element));
@@ -48,7 +50,8 @@ function App() {
         message,
         setMessage,
         listToShow, setListToShow,
-        filtered, setFiltered
+        filtered, setFiltered,
+        isLoading, setIsLoading
       }}
     >
       <div className="container">

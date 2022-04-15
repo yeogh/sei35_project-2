@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import noimage from "../images/no_image_icon.png";
 import BookContext from "./book-context";
 
+import LoadingSpinner from "../components/LoadingSpinner"
+
 const Result = () => {
 
   const bookCtx = useContext(BookContext);
@@ -108,7 +110,10 @@ const Result = () => {
     }
   }
 
-  let resultlist = bookCtx.listToShow.map((element, index) => {
+  let content = "";
+
+  if (bookCtx.titleList) {
+    content = bookCtx.listToShow.map((element, index) => {
     return (
      <div
        className="col"
@@ -142,6 +147,15 @@ const Result = () => {
      </div>
    );
  });
+} 
+
+if (bookCtx.isLoading) {
+  content = (
+    <div className="centered">
+      <LoadingSpinner />
+    </div>
+  );
+}
 
 
 
@@ -172,7 +186,7 @@ const Result = () => {
         <div id="sort">
           <h6>Sort by:</h6>
           <select onChange={handleSortChange}>
-            <option value="none" selected="selected">None</option>
+            <option value="none">None</option>
             <option value="title">Title (alphabetical)</option>
             <option value="date">Date (latest to earliest)</option>
           </select>
@@ -182,7 +196,8 @@ const Result = () => {
    
       <div className="row row-cols-3 row-cols-md-6 g-4">
         {/* {bookCtx.sorted ? sortedlist() : resultlist} */}
-        {resultlist}
+        {/* {resultlist} */}
+        {content}
       </div>
      
     </>

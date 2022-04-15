@@ -16,6 +16,8 @@ const Search = () => {
 
 //Using Axios
 const fetchSearchPost = async () => { 
+  bookCtx.setIsLoading(true);
+  
   const searchurl = "http://openlibrary.org/search.json?q=";
   const res = await axios.get(searchurl + bookCtx.input);
   const searchdata = res.data;
@@ -90,6 +92,8 @@ const fetchSearchPost = async () => {
 
     console.log("NumFound:" + searchdata.num_found);
     console.log(bookCtx.numOfResult);
+
+    bookCtx.setIsLoading(false);
   };
 
   const handleInputChange = (event) => {
