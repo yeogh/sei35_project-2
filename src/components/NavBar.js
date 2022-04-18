@@ -32,7 +32,7 @@ const NavBar = () => {
           <p className="position-relative">
             MyList
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-              {bookCtx.mylist.length}
+              {bookCtx.mylist? bookCtx.mylist.length : 0}
               <span className="visually-hidden">my list</span>
             </span>
           </p>
