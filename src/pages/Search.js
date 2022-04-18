@@ -21,7 +21,7 @@ const fetchSearchPost = async () => {
   const searchurl = "https://openlibrary.org/search.json?q=";
   const res = await axios.get(searchurl + bookCtx.input);
   const searchdata = res.data;
-  console.log(searchdata);
+  // console.log(searchdata);
 
   //Using Fetch API
   // const fetchSearchPost = async () => {
@@ -80,18 +80,18 @@ const fetchSearchPost = async () => {
         ];
       });
 
-      console.log("TitleArr:" + titleArr);
-      console.log("AuthorArr:" + authorArr[8]);
-      console.log(typeof authorArr[8], authorArr[8]);
-      console.log("PubYearArr:" + pubYearArr[0]);
-      console.log("OlidArr:" + olidArr);
-      console.log("ISBNArr:" + isbnArr);
-      console.log(langArr);
+      // console.log("TitleArr:" + titleArr);
+      // console.log("AuthorArr:" + authorArr[8]);
+      // console.log(typeof authorArr[8], authorArr[8]);
+      // console.log("PubYearArr:" + pubYearArr[0]);
+      // console.log("OlidArr:" + olidArr);
+      // console.log("ISBNArr:" + isbnArr);
+      // console.log(langArr);
     }
     bookCtx.setNumOfResult(searchdata.num_found);
 
-    console.log("NumFound:" + searchdata.num_found);
-    console.log(bookCtx.numOfResult);
+    // console.log("NumFound:" + searchdata.num_found);
+    // console.log(bookCtx.numOfResult);
 
     bookCtx.setIsLoading(false);
   };

@@ -40,16 +40,16 @@ const Result = () => {
   useEffect(() => {
     bookCtx.setListToShow(bookCtx.titleList)
 
-    console.log(bookCtx.titleList);
-    console.log(langlist);
-    console.log(langlisttidied);
-    console.log(uniqueLangList);
-    console.log(selectlist);
+    // console.log(bookCtx.titleList);
+    // console.log(langlist);
+    // console.log(langlisttidied);
+    // console.log(uniqueLangList);
+    // console.log(selectlist);
 
   }, [bookCtx.titleList])
 
   const handleFilterChange = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
 
     if (e.target.value === "all") {
       bookCtx.setListToShow(bookCtx.titleList)
