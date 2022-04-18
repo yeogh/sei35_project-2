@@ -13,7 +13,7 @@ function App() {
   const [titleList, setTitleList] = useState([]);
   const [numOfResult, setNumOfResult] = useState();
   const [result, setResult] = useState(false);
-  const [mylist, setMyList] = useState([]);
+  const [mylist, setMyList] = useState(JSON.parse(localStorage.getItem("myList")));
   const [sorted, setSorted] = useState(0);
   const [message, setMessage] = useState("");
 
@@ -25,11 +25,13 @@ function App() {
   const addtoMyList = (element) => {
     console.log(titleList.indexOf(element));
     setMyList([...mylist, element]);
+    localStorage.setItem("myList", JSON.stringify([...mylist, element]))
     let index = titleList.indexOf(element);
     titleList[index].inlist = true;
-
     console.log(mylist, element);
-  };
+};
+
+  
 
   return (
     <BookContext.Provider
