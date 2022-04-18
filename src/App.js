@@ -31,6 +31,12 @@ function App() {
     console.log(mylist, element);
 };
 
+const removefromMyList = (index) => {
+  const myListArr = mylist.filter((d, i) => i !== index)
+  setMyList(myListArr);
+  localStorage.setItem("myList", JSON.stringify(myListArr))
+  
+};
   
 
   return (
@@ -53,7 +59,7 @@ function App() {
         setMessage,
         listToShow, setListToShow,
         filtered, setFiltered,
-        isLoading, setIsLoading
+        isLoading, setIsLoading, removefromMyList
       }}
     >
       <div className="container">

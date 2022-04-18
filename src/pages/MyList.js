@@ -30,6 +30,7 @@ const MyList = () => {
                   {element.pubYear}
                 </p>
               </div>
+              <button onClick={() => bookCtx.removefromMyList(index)}>Remove</button>
             </div>
           </div>
         ))}

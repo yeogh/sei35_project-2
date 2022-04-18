@@ -18,7 +18,7 @@ const Search = () => {
 const fetchSearchPost = async () => { 
   bookCtx.setIsLoading(true);
   
-  const searchurl = "http://openlibrary.org/search.json?q=";
+  const searchurl = "https://openlibrary.org/search.json?q=";
   const res = await axios.get(searchurl + bookCtx.input);
   const searchdata = res.data;
   console.log(searchdata);
