@@ -8,7 +8,7 @@ App with the following functionalities:
 - Selected titles added to/ removed from My List (which will be stored in local storage)
 
 ## Technical Used
-- React (using built-in fetch API)
+- React (using axios)
 - Bootstrap
 
 ## APIs Used
