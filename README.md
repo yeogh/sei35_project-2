@@ -5,7 +5,7 @@ Deployed to netlify https://the-bookfinder.netlify.app/
 App with the following functionalities:
 - Search for books by title/author keyword(s)
 - Displayed search results can be filtered by languages and further sort by either title (alphabetical order) or year (latest to earliest)
-- Selected titles added to/ removed from My List (which will be stored in local storage)
+- Selected titles can be added to/ removed from My List (which will be stored in local storage)
 
 ## Technical Used
 - React (using axios)
